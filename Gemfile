@@ -17,6 +17,7 @@ gem 'omniauth', '~> 1.3', '>= 1.3.1'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
+gem 'geocoder', '~> 1.3', '>= 1.3.7'
 
 group :development, :test do
   gem 'byebug'
