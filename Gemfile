@@ -20,6 +20,11 @@ gem 'paperclip', '~> 4.3', '>= 4.3.6'
 gem 'geocoder', '~> 1.3', '>= 1.3.7'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'jquery-ui-themes', '~> 0.0.11'
+gem 'private_pub', '~> 1.0', '>= 1.0.3'
+gem 'thin', '~> 1.7'
+gem 'rack', '~> 1.6', '>= 1.6.4'
+
+
 
 group :development, :test do
   gem 'byebug'

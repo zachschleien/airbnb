@@ -43,13 +43,13 @@
                 <%= @room.home_type %>
               </div>
               <div class="col-sm-3">
-                <%= pluralize(@room.accommodate, 'Guest') %>
+                <%= @room.accommodate %> <%= @room.accommodate > 1? "Guests" : "Guest" %>
               </div>
               <div class="col-sm-3">
-                <%= pluralize(@room.bed_room, 'Bedroom') %>
+                <%= @room.bed_room %> <%= @room.bed_room > 1? "Bedrooms" : "Bedroom" %>
               </div>
               <div class="col-sm-3">
-                <%= pluralize(@room.bath_room, 'Bathroom') %>
+                <%= @room.bath_room %> <%= @room.bath_room > 1? "Bathrooms" : "Bathroom" %>
               </div>
             </div>
 
@@ -86,10 +86,8 @@
             </ul>
           </div>
           <div class="col-md-6">
-            <ul class="amenities">
-              <li class="<%= 'text-line-through' if !@room.is_heating %>">Heating</li>
-              <li class="<%= 'text-line-through' if !@room.is_air %>">Air Conditioning</li>
-            </ul>
+            <li class="<%= 'text-line-through' if !@room.is_heating %>">Heating</li>
+            <li class="<%= 'text-line-through' if !@room.is_air %>">Air Conditioning</li>
           </div>
         </div>
       </div>
@@ -134,10 +132,25 @@
     <br>
     <hr>
 
+    <!-- Reviews -->
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
+        <div class="container">
+          <div>
+            <%= render 'reviews/form' if @booked && !@hasReview %>
+          </div>
+          <div>
+            <%= render 'reviews/list' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Google Map -->
     <div class="row">
       <div class="col-md-12">
-
+        
         <div id="map"></div>
 
         <style>
@@ -160,13 +173,14 @@
 
             var marker = new google.maps.Marker({
               position: new google.maps.LatLng(<%= @room.latitude %>, <%= @room.longitude %>),
-              title: "<%= @room.listing_name %> " 
+              title: "AirAlien" 
             });
 
             marker.setMap(map);
           }
           google.maps.event.addDomListener(window, 'load', initialize);
         </script>
+
 
       </div>
     </div>
@@ -175,6 +189,7 @@
     <h3>Near by</h3>
     <div class="row">
       <% for room in @room.nearbys(10) %>
+        
         <div class="col-md-4">
           <div class="panel panel-default">
             <div class="panel-heading preview">
@@ -190,5 +205,14 @@
       <% end %>
     </div>
 
+
   </div>
 </div>
+
+<script>
+  $('#average_rating').raty({
+    path: '/assets',
+    readOnly: true,
+    score: <%= @room.average_rating %>
+  });
+</script>
