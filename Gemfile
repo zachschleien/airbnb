@@ -23,6 +23,7 @@ gem 'jquery-ui-themes', '~> 0.0.11'
 gem 'private_pub', '~> 1.0', '>= 1.0.3'
 gem 'thin', '~> 1.7'
 gem 'rack', '~> 1.6', '>= 1.6.4'
+gem 'ransack', '~> 1.7'
 
 
 
